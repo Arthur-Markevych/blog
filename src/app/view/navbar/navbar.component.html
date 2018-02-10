@@ -1,0 +1,32 @@
+<nav>
+  <div class="container">
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo">Logo</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      
+    <ul class="right hide-on-med-and-down">
+      <li><a href="#" routerLink="feed">Feed</a></li>
+      <li><a href="#">About US</a></li>
+      <li><a href="#">Contacts</a></li>
+      <li><a href="#">Something else</a></li>
+    <span *ngIf="(user | async) as user">
+      <li>
+        <span class="right-align" style="color:#5b596dbd" href="#">{{ user.displayName }}</span>
+      </li>
+      <li class="right"><a href="#" (click)="logout()">logout</a></li>
+    </span>
+    </ul>
+    <ul class="side-nav" id="mobile-demo">
+      <div *ngIf="(user | async) as user" >
+        <li ><a class="navbar-email" href="#">{{ user.displayName }}</a></li>
+        <li><a href="#" routerLink="feed">Feed</a></li>
+      </div>
+        <li><a href="#">About US</a></li>
+        <li><a href="#">Contacts</a></li>
+        <li><a href="#">Something else</a></li>
+        <li *ngIf="(user | async) as user"><a href="#" (click)="logout()">logout</a></li>
+      </ul>
+  </div>
+</div>
+</nav>
+

@@ -1,0 +1,22 @@
+<div class="container form-container">
+    <div class="card-panel">
+      <div class="col s12 m5">
+      <form #formData='ngForm' (ngSubmit)='onSubmit(formData)'>
+        <div class="input-field col s6 row">
+            <input type="text" placeholder="Email address" (ngModel)="email" name="email" class="input-txt" required>
+        </div> 
+        <div class="input-field col s6 row">
+            <input type="password" placeholder="Password" (ngModel)="password" name="password" class="input-txt" required>
+        </div> 
+      
+        <div class="row">
+          <button type="submit" [ngClass]="{'left btn-flat disabled': !formData.valid, 'left waves-effect waves-light btn': formData.valid }">Log in</button>
+          <button (click)="loginGoogle()" class="waves-effect waves-light btn red right" >Google Login</button>
+        </div>
+      </form>
+      <div class="row">
+        <button routerLink="/signup" routerLinkActive="active" style="width: 100%" class="waves-effect waves-light btn" href="#">Sign Up</button>
+      </div> 
+    </div>
+  </div> 
+</div>

@@ -1,0 +1,15 @@
+<div class="container form-container">
+    <div class="card-panel">
+        <div class="col s12 m5">
+  <a routerLink="/login" id="goback">Login</a>
+  <h4>Sign Up</h4>
+  <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+      <input type="text" placeholder="Firstname" (ngModel)="firstName" name="firstName" class="input-txt" required>
+      <input type="text" placeholder="Lastname" (ngModel)="lastName" name="lastName" class="input-txt" required>
+      <input type="text" placeholder="Email address" (ngModel)="email" name="email" class="input-txt" required>
+      <input type="password" placeholder="Password" (ngModel)="password" name="password" class="input-txt" required>
+      <button type="submit" style="width:100%" [ngClass]="{'btn-flat disabled': !formData.valid, 'waves-effect waves-light btn': formData.valid }">Sign up</button>
+  </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+nav {
+    background: rgb(3, 203, 238)!important;
+}
+
+.navbar-email {
+    color: rgb(255, 125, 0)!important;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.form-container {
+    max-width: 350px!important;
+    min-width: 303px!important;
+}
+
+.my-card{
+    min-width: 433px;
+}
+
+
+.google {
+    border: 1px solid #95989A;
+    background: #fff;
+    background-size: 25px;
+}
+
+.email {
+    background: #ECECEC;
+    background-size: 25px;
+}
+
+.create-account-txt {
+    text-align: center;
+    display: block;
+    margin: 15px 0;
+}
+
+.auth-btn {
+    background: #3B8598;
+    color: white;
+}
+
+/* input.input-txt {
+    background: #fff !important;
+    padding: 0.5em 1em;
+    font-size: 1.3em;
+    border: 1px solid #BBBBBB;
+    width: 90%;
+    margin-bottom: 1em;
+} */

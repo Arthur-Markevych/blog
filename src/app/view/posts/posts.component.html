@@ -1,0 +1,17 @@
+<h5 style="color:#ee4502" *ngIf="posts | async">Public notes</h5>
+<div class="container" *ngFor="let post of posts | async">
+    <div class="row">
+      <div class="col m12 m6">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title green-text">{{ post.title }}</span>
+            <p>{{ post.content }}</p>
+          </div>
+          <div class="card-action">
+            <span style="color:#eebb02" >{{ post.owner }}</span>
+            <span class="right" style="color:#8802ee">{{ post.postData | date:'short' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
