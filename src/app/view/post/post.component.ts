@@ -7,6 +7,7 @@ import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs/Observable';
 import { timeout } from 'q';
 import 'rxjs/add/operator/map';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-post',
@@ -19,32 +20,17 @@ export class PostComponent implements OnInit {
   _posts:Observable<Post[]>;
   private edit:boolean = false;
 
-  private post:Post =  {
-    userId:'',
-    title:'',
-    content:'',
-    public:false,
-    postData: null
-  }
+  private post:Post;
 
-
-  private emptyPost:Post = {
-    userId:'',
-    title:'',
-    content:'',
-    public:false,
-    postData: null
-  }
 
   constructor(
     private postService:PostService,
     private afs:AngularFirestore,
-    private userService:UserService
+    private userService:UserService,
+    private flassMessages:FlashMessagesService
   ) {  }
 
   ngOnInit() {
-
-    
 
     this._posts = this.postService.getUsersPosts().snapshotChanges().map(action => {
       return action.map(a => {
@@ -54,28 +40,19 @@ export class PostComponent implements OnInit {
       })
     }) 
 
-    console.log('pppooosssttt', this._posts)
-
-  
-    
-    // .subscribe((querySnapshot) => {
-    //   querySnapshot.forEach((doc) => {
-    //     console.log('doc', doc)
-    //     // const post:Post ={
-    //     //   uid: doc.uid,
-    //     //   title: doc.title,
-    //     //   content: doc.content,
-    //     //   owner: doc.content,
-    //     //   public: doc.public,
-    //     //   postData: doc.postData,
-    //     //   userId: doc.userId
-    //     // }
-    //     // console.log('Post: ', post)
-    //   })
-    // })
-
-    this.post = this.emptyPost;
+    this.post = this.getClearPost();
       
+  }
+
+  getClearPost() : Post {
+    const clearPost:Post = {
+      userId:'',
+      title:'',
+      content:'',
+      public:false,
+      postData: null
+    }
+    return clearPost;
   }
 
   onSubmit(formData){
@@ -87,12 +64,10 @@ export class PostComponent implements OnInit {
       this.post.userId = this.userService.getCurrentUser().uid;
       this.post.postData = new Date();
       this.addPost(this.post);
-      console.log('Post added', this.post);
-
-      this.post = this.emptyPost;
-
+      this.post = this.getClearPost();
     } else {
-      console.log('post invalid', formData.value)
+      this.flassMessages.show('Error' + formData.value, {cssClass:'alaert-danger', timeOut:8000})
+      
     }
   }
 
@@ -102,7 +77,14 @@ export class PostComponent implements OnInit {
   }
 
   onCancle(){
-    this.post = this.emptyPost;
+    this.post = {
+      userId:'',
+      title:'',
+      content:'',
+      public:false,
+      postData: null
+    }
+    
     this.edit = false;
   }
 
@@ -112,13 +94,18 @@ export class PostComponent implements OnInit {
 
   addPost(post:Post){
     if(this.edit == false){
-      this.postService.addPost(post);
+      this.postService.addPost(post).then(result => {
+        this.flassMessages.show('Succcessful', {cssClass:'alert-success', timeOut:4000})
+      })
+      this.post = this.getClearPost();
     } else{ 
-      this.postService.udatePost(post);
+      this.postService.udatePost(post).then(result => {
+        this.flassMessages.show('Succcessful', {cssClass:'alert-success', timeOut:4000})
+      })
       this.edit = false;
+      this.post = this.getClearPost();
     }
-     this.post = this.emptyPost;
-    
+  
   }
 
 }

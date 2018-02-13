@@ -34,12 +34,12 @@ export class PostService {
    
 
   addPost(post:Post){
-    this.afs.collection(`posts`).add(post);
+    return this.afs.collection(`posts`).add(post);
   }
 
   udatePost(post:Post) {
     this.postDoc = this.afs.doc(`posts/${post.uid}`);
-    this.postDoc.update(post);
+     return this.postDoc.update(post);
   }
 
   deletePost(post:Post) {
