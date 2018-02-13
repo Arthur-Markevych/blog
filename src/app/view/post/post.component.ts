@@ -6,6 +6,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs/Observable';
 import { timeout } from 'q';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-post',
@@ -18,9 +19,16 @@ export class PostComponent implements OnInit {
   _posts:Observable<Post[]>;
   private edit:boolean = false;
 
-  private post:Post;
+  private post:Post =  {
+    userId:'',
+    title:'',
+    content:'',
+    public:false,
+    postData: null
+  }
+
+
   private emptyPost:Post = {
-    uid:'',
     userId:'',
     title:'',
     content:'',
@@ -36,21 +44,17 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
 
+    
+
     this._posts = this.postService.getUsersPosts().snapshotChanges().map(action => {
       return action.map(a => {
         const data = a.payload.doc.data() as Post;
         const uid = a.payload.doc.id;
         return {uid, ...data}
-      });
+      })
     }) 
 
-    // this._posts = this.postService.getUsersPosts().snapshotChanges().map(action => {
-    //   return action.map(a => {
-    //     const data = a.payload.doc.data() as Post;
-    //     const uid = a.payload.doc.id;
-    //     return {uid, ...data}
-    //   });
-    // })
+    console.log('pppooosssttt', this._posts)
 
   
     
@@ -69,14 +73,6 @@ export class PostComponent implements OnInit {
     //     // console.log('Post: ', post)
     //   })
     // })
-
-    // this._posts = this.postService.getUsersPosts().snapshotChanges().map(action => {
-    //   return action.map(a => {
-    //     const data = a.payload.doc.data() as Post;
-    //     const id = a.payload.doc.id;
-    //     return {id, ...data}
-    //   })
-    // });
 
     this.post = this.emptyPost;
       

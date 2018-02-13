@@ -25,6 +25,7 @@ export class PostService {
   ) {
     this.userId = this.authService.getCurrent_User().uid;
 
+    // this.usersPostCollection = this.afs.collection<Post>(`posts`);
     this.usersPostCollection = this.afs.collection<Post>(`posts`, ref => ref.where('userId', '==', this.userId));
 
     this.publicPostCollection = this.afs.collection<Post>('posts', ref => ref.where('public', '==', true));

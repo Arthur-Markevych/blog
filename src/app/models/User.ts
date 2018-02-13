@@ -1,5 +1,3 @@
-import { Post } from "./Post";
-import * as firebase from 'firebase/app';
 
 export interface User {
     uid?:string;

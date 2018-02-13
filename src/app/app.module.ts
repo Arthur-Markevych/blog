@@ -18,8 +18,9 @@ import { ProfileComponent } from './view/profile/profile.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
-import { UserService } from './services/user.service'
-import { PostService } from './services/post.service'
+import { UserService } from './services/user.service';
+import { PostService } from './services/post.service' ;
+
 
 
 // Modules Imports
@@ -56,6 +57,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
     AngularFireAuthModule,
     MaterializeModule,
     FlashMessagesModule.forRoot()
+    
   ],
   providers: [
     AuthService, 
